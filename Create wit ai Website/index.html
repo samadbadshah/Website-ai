@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saylani IT Training - Changing Lives, Building Careers</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        saylani: {
+                            blue: '#0d6efd',
+                            darkBlue: '#0056b3',
+                            accentBlue: '#2563eb',
+                            green: '#66bb6a',
+                            darkGreen: '#2e7d32',
+                            darkBg: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Segoe UI', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .tab-btn.active {
+            background-color: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top center, rgba(37, 99, 235, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+        .stats-gradient {
+            background: linear-gradient(90deg, #1d4ed8 0%, #2563eb 50%, #10b981 100%);
+        }
+        .vision-gradient {
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #10b981 100%);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased leading-relaxed">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-blue-700 to-emerald-600 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-sm flex justify-between items-center px-6">
+        <span class="mx-auto flex items-center gap-2">
+            <span class="bg-amber-400 text-slate-900 text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full animate-pulse">New</span>
+            Admissions Open for Batch 12 - Cloud Applied Generative AI & Web3!
+        </span>
+        <div class="hidden md:flex gap-4 items-center text-xs">
+            <a href="tel:+9221111729526" class="hover:underline"><i class="fas fa-phone mr-1"></i> (021) 111-729-526</a>
+            <span class="opacity-40">|</span>
+            <a href="mailto:info@saylaniit.com" class="hover:underline"><i class="fas fa-envelope mr-1"></i> info@saylaniit.com</a>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200/80 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="flex items-center">
+                        <!-- Custom SVG Saylani Logo style -->
+                        <div class="w-12 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-black text-white text-xl tracking-tighter shadow-md group-hover:scale-105 transition-transform">
+                            SIT
+                        </div>
+                        <div class="ml-2.5 flex flex-col justify-center">
+                            <div class="flex items-center gap-1">
+                                <span class="font-extrabold text-xl text-blue-600 tracking-tight">Saylani</span>
+                                <span class="font-extrabold text-xl text-emerald-500">IT</span>
+                            </div>
+                            <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-widest -mt-1">Training Portal</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-slate-600">
+                    <a href="#home" class="nav-link text-blue-600 hover:text-blue-600 transition-colors py-2 border-b-2 border-blue-600">Home</a>
+                    <a href="#about" class="nav-link hover:text-blue-600 transition-colors py-2 border-b-2 border-transparent">About</a>
+                    
+                    <!-- Courses Dropdown Trigger -->
+                    <div class="relative group py-2">
+                        <a href="#courses" class="nav-link hover:text-blue-600 transition-colors flex items-center gap-1.5 border-b-2 border-transparent">
+                            Courses <i class="fas fa-chevron-down text-xs opacity-60 group-hover:rotate-180 transition-transform"></i>
+                        </a>
+                        <div class="absolute left-0 top-full hidden group-hover:block w-64 bg-white rounded-xl shadow-xl border border-slate-100 p-2 z-50 animate-fadeIn">
+                            <a href="#courses" onclick="filterCourses('dev')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50 text-slate-700 hover:text-blue-600">
+                                <div class="w-8 h-8 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center"><i class="fas fa-code text-sm"></i></div>
+                                <div>
+                                    <div class="font-medium text-xs">Web & Mobile Dev</div>
+                                    <div class="text-[10px] text-slate-400">React, Node, Flutter</div>
+                                </div>
+                            </a>
+                            <a href="#courses" onclick="filterCourses('ai')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50 text-slate-700 hover:text-blue-600">
+                                <div class="w-8 h-8 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center"><i class="fas fa-brain text-sm"></i></div>
+                                <div>
+                                    <div class="font-medium text-xs">Agentic AI & Python</div>
+                                    <div class="text-[10px] text-slate-400">Data Science & GenAI</div>
+                                </div>
+                            </a>
+                            <a href="#courses" onclick="filterCourses('design')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50 text-slate-700 hover:text-blue-600">
+                                <div class="w-8 h-8 rounded-md bg-purple-50 text-purple-600 flex items-center justify-center"><i class="fas fa-palette text-sm"></i></div>
+                                <div>
+                                    <div class="font-medium text-xs">Graphic Design & UI/UX</div>
+                                    <div class="text-[10px] text-slate-400">Figma, Photoshop</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="#campuses" class="nav-link hover:text-blue-600 transition-colors py-2 border-b-2 border-transparent">Campuses</a>
+                    <a href="#articles" class="nav-link hover:text-blue-600 transition-colors py-2 border-b-2 border-transparent">Articles</a>
+                    <button onclick="openModal('resultModal')" class="nav-link hover:text-blue-600 transition-colors py-2 border-b-2 border-transparent text-left">Check Result</button>
+                </div>
+
+                <!-- Action Button -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <button onclick="openModal('enrollModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-2.5 rounded-full shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30 transition-all flex items-center gap-2 group">
+                        Enroll Now <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-slate-700 hover:text-blue-600 p-2 rounded-lg focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3">
+            <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-md font-semibold text-blue-600 bg-blue-50">Home</a>
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50">About</a>
+            <a href="#courses" class="mobile-nav-link block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50">Courses</a>
+            <a href="#campuses" class="mobile-nav-link block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50">Campuses</a>
+            <a href="#articles" class="mobile-nav-link block px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50">Articles</a>
+            <button onclick="openModal('resultModal'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-md font-semibold text-slate-700 hover:bg-slate-50">Check Result</button>
+            <div class="pt-2">
+                <button onclick="openModal('enrollModal'); toggleMobileMenu();" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl shadow-md text-center">
+                    Enroll Now ↗
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="hero-gradient pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-6 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    Pakistan's Largest Free Mass IT Training Initiative
+                </div>
+
+                <!-- Main Hero Heading -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight max-w-4xl mx-auto leading-tight md:leading-none">
+                    Building Pakistan's <br class="hidden sm:inline"/>
+                    <span class="bg-gradient-to-r from-blue-600 via-blue-500 to-emerald-500 bg-clip-text text-transparent">Tech Future</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto font-normal">
+                    Changing Lives. Building Careers. Shaping the Future through World-Class Free Technology Education.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button onclick="openModal('enrollModal')" class="w-full sm:w-auto px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-base shadow-xl shadow-blue-600/30 hover:scale-105 transition-all">
+                        ENROLL NOW
+                    </button>
+                    <a href="#courses" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-slate-800 font-bold text-base border-2 border-slate-200 hover:border-slate-300 shadow-sm transition-all text-center">
+                        EXPLORE COURSES
+                    </a>
+                </div>
+
+                <!-- Hero Media Cards Row -->
+                <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto px-2">
+                    
+                    <!-- Card 1: Male Student -->
+                    <div class="bg-white rounded-2xl p-3 shadow-xl border border-slate-100 hover:-translate-y-2 transition-all duration-300 group">
+                        <div class="relative overflow-hidden rounded-xl h-64 bg-slate-100">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Saylani Graduate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent p-4 text-left text-white">
+                                <span class="bg-emerald-500 text-slate-900 font-bold text-[10px] px-2 py-0.5 rounded uppercase">Full Stack Alumni</span>
+                                <h4 class="font-bold text-base mt-1">Muhammad Bilal</h4>
+                                <p class="text-xs text-slate-300">Software Engineer @ Tech Firm</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Central Featured Video Badge -->
+                    <div class="bg-gradient-to-br from-slate-900 to-blue-950 rounded-2xl p-6 shadow-xl border border-slate-800 text-white flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
+                        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-600/20 rounded-full blur-2xl"></div>
+                        <div class="text-left">
+                            <div class="inline-flex items-center gap-2 bg-blue-500/20 text-blue-300 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30">
+                                <i class="fas fa-video text-red-500"></i> Entry Examination
+                            </div>
+                            <h3 class="text-xl font-bold mt-4 leading-snug">SAYLANI MEGA IT ENTRANCE EXAM</h3>
+                            <p class="text-xs text-slate-400 mt-2">Over 50,000+ candidates participated in Karachi National Stadium entrance test.</p>
+                        </div>
+                        <div class="my-6">
+                            <button onclick="alert('Playing Entrance Exam Highlights Video...')" class="w-14 h-14 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center mx-auto shadow-lg shadow-red-600/50 hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-lg ml-1"></i>
+                            </button>
+                        </div>
+                        <div class="text-xs text-slate-400 border-t border-slate-800 pt-3 flex justify-between items-center">
+                            <span>Grand Examination Stadium</span>
+                            <span class="text-emerald-400 font-semibold">Live Event</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Female Student -->
+                    <div class="bg-white rounded-2xl p-3 shadow-xl border border-slate-100 hover:-translate-y-2 transition-all duration-300 group">
+                        <div class="relative overflow-hidden rounded-xl h-64 bg-slate-100">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Saylani Female Graduate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent p-4 text-left text-white">
+                                <span class="bg-blue-500 text-white font-bold text-[10px] px-2 py-0.5 rounded uppercase">AI & Data Science</span>
+                                <h4 class="font-bold text-base mt-1">Ayesha Khan</h4>
+                                <p class="text-xs text-slate-300">AI Specialist & Top Freelancer</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- KEY STATS GRADIENT SECTION -->
+        <section class="stats-gradient py-12 text-white shadow-inner">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    
+                    <div class="p-2">
+                        <div class="text-3xl sm:text-5xl font-black tracking-tight mb-1">400,000+</div>
+                        <div class="text-xs sm:text-sm font-semibold text-blue-100 uppercase tracking-wider">Students Trained</div>
+                    </div>
+
+                    <div class="p-2">
+                        <div class="text-3xl sm:text-5xl font-black tracking-tight mb-1">400+</div>
+                        <div class="text-xs sm:text-sm font-semibold text-blue-100 uppercase tracking-wider">Expert Instructors</div>
+                    </div>
+
+                    <div class="p-2">
+                        <div class="text-3xl sm:text-5xl font-black tracking-tight mb-1">80%</div>
+                        <div class="text-xs sm:text-sm font-semibold text-blue-100 uppercase tracking-wider">Employment Success</div>
+                    </div>
+
+                    <div class="p-2">
+                        <div class="text-3xl sm:text-5xl font-black tracking-tight mb-1">150+</div>
+                        <div class="text-xs sm:text-sm font-semibold text-blue-100 uppercase tracking-wider">Startups Incubated</div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE SIT / HIGHLIGHTS GRID -->
+        <section id="about" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-blue-600 font-extrabold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Why Choose SIT</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Empowering You with World-Class IT Education</h2>
+                    <p class="text-slate-600 mt-4 text-base">Saylani Mass IT Training (SMIT) bridges the digital skills gap by offering industry-vetted technological education with 100% scholarship support.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Feature 1 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
+                        <div class="w-14 h-14 bg-blue-600 text-white rounded-xl flex items-center justify-center text-2xl shadow-md shadow-blue-500/20 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Hands-On Training & Projects</h3>
+                        <p class="text-slate-600 text-sm">Students build real-world commercial software applications using latest industry frameworks and tools.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
+                        <div class="w-14 h-14 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-2xl shadow-md shadow-emerald-500/20 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">80% Employment Rate</h3>
+                        <p class="text-slate-600 text-sm">High career placement rate in international remote software companies and national IT enterprises.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
+                        <div class="w-14 h-14 bg-amber-500 text-white rounded-xl flex items-center justify-center text-2xl shadow-md shadow-amber-500/20 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Affordable & Accessible for All</h3>
+                        <p class="text-slate-600 text-sm">Initiated under Saylani Welfare International Trust to ensure zero financial barrier for deserving talent.</p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
+                        <div class="w-14 h-14 bg-indigo-600 text-white rounded-xl flex items-center justify-center text-2xl shadow-md shadow-indigo-500/20 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">150+ Startups Incubated</h3>
+                        <p class="text-slate-600 text-sm">Fostering innovation by turning tech students into founders and tech enterprise leaders.</p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
+                        <div class="w-14 h-14 bg-purple-600 text-white rounded-xl flex items-center justify-center text-2xl shadow-md shadow-purple-500/20 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Global Industry Recognition</h3>
+                        <p class="text-slate-600 text-sm">Certifications and learning pathways recognized by Cisco Networking Academy and global tech leaders.</p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group">
+                        <div class="w-14 h-14 bg-rose-600 text-white rounded-xl flex items-center justify-center text-2xl shadow-md shadow-rose-500/20 mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Nationwide Network</h3>
+                        <p class="text-slate-600 text-sm">Over 30 state-of-the-art computer lab campuses operating across Karachi, Lahore, Islamabad & more.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- COURSES SECTION -->
+        <section id="courses" class="py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-blue-600 font-extrabold text-xs uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full">Training Programs</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Browse Our Top Courses</h2>
+                    <p class="text-slate-600 mt-3">Select your desired technology track and apply for upcoming batches.</p>
+                </div>
+
+                <!-- Course Category Filter Tabs -->
+                <div class="flex justify-center gap-2 sm:gap-3 flex-wrap mb-12">
+                    <button onclick="filterCourses('all')" class="tab-btn active font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full border border-slate-300 bg-white text-slate-700 transition-all">
+                        Admissions Open
+                    </button>
+                    <button onclick="filterCourses('dev')" class="tab-btn font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full border border-slate-300 bg-white text-slate-700 transition-all">
+                        Development
+                    </button>
+                    <button onclick="filterCourses('ai')" class="tab-btn font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full border border-slate-300 bg-white text-slate-700 transition-all">
+                        AI & Python
+                    </button>
+                    <button onclick="filterCourses('design')" class="tab-btn font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full border border-slate-300 bg-white text-slate-700 transition-all">
+                        Designing
+                    </button>
+                    <button onclick="filterCourses('network')" class="tab-btn font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full border border-slate-300 bg-white text-slate-700 transition-all">
+                        Networking & Cloud
+                    </button>
+                </div>
+
+                <!-- Course Cards Grid -->
+                <div id="courseContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Course 1: Graphic Design -->
+                    <div class="course-card design bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 bg-slate-100">
+                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80" alt="Graphic Design" class="w-full h-full object-cover">
+                            <span class="absolute top-4 left-4 bg-emerald-500 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full shadow">ADMISSION OPEN</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-purple-600 uppercase">Designing Track</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">Graphic Designing with AI</h3>
+                                <p class="text-slate-600 text-sm">Transform into a commercial design master using Adobe Creative Suite & AI generative design tools.</p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs text-slate-500 font-medium"><i class="far fa-clock mr-1"></i> 6 Months</span>
+                                <button onclick="openModal('enrollModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors">Enroll Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 2: CCNA -->
+                    <div class="course-card network bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 bg-slate-100">
+                            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="CCNA Networking" class="w-full h-full object-cover">
+                            <span class="absolute top-4 left-4 bg-emerald-500 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full shadow">ADMISSION OPEN</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-blue-600 uppercase">Networking Track</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">CCNA - Cisco Certified</h3>
+                                <p class="text-slate-600 text-sm">Master enterprise network switching, routing, IP addressing, and Cisco network administration.</p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs text-slate-500 font-medium"><i class="far fa-clock mr-1"></i> 6 Months</span>
+                                <button onclick="openModal('enrollModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors">Enroll Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 3: Cybersecurity -->
+                    <div class="course-card network bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 bg-slate-100">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Cybersecurity" class="w-full h-full object-cover">
+                            <span class="absolute top-4 left-4 bg-emerald-500 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full shadow">ADMISSION OPEN</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-rose-600 uppercase">Security Track</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">Cybersecurity Essentials</h3>
+                                <p class="text-slate-600 text-sm">Ethical hacking fundamentals, network defense protocols, and vulnerability analysis skills.</p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs text-slate-500 font-medium"><i class="far fa-clock mr-1"></i> 4 Months</span>
+                                <button onclick="openModal('enrollModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors">Enroll Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 4: Web & Mobile -->
+                    <div class="course-card dev bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 bg-slate-100">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Web Development" class="w-full h-full object-cover">
+                            <span class="absolute top-4 left-4 bg-emerald-500 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full shadow">ADMISSION OPEN</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-600 uppercase">Development Track</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">Web & Mobile App Dev</h3>
+                                <p class="text-slate-600 text-sm">HTML5, Modern JavaScript ES6+, React.js, Node.js, Express, MongoDB & React Native.</p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs text-slate-500 font-medium"><i class="far fa-clock mr-1"></i> 6 Months</span>
+                                <button onclick="openModal('enrollModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors">Enroll Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 5: Gen AI & Python -->
+                    <div class="course-card ai bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                        <div class="relative h-48 bg-slate-100">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80" alt="Generative AI" class="w-full h-full object-cover">
+                            <span class="absolute top-4 left-4 bg-emerald-500 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-full shadow">ADMISSION OPEN</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-blue-600 uppercase">AI & Data Science</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">Cloud Applied GenAI</h3>
+                                <p class="text-slate-600 text-sm">Python programming, LangChain, Large Language Models (LLMs), AI Agents & Vector DBs.</p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs text-slate-500 font-medium"><i class="far fa-clock mr-1"></i> 12 Months</span>
+                                <button onclick="openModal('enrollModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors">Enroll Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CAMPUSES MAP SECTION -->
+        <section id="campuses" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                
+                <span class="text-blue-600 font-extrabold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Nationwide Reach</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Find Saylani Campuses Near You</h2>
+                <p class="text-slate-600 mt-3 max-w-2xl mx-auto">Saylani Welfare Trust IT centers are active across Pakistan. Click a city below to view physical campus details.</p>
+
+                <!-- Interactive City Selection Pill Buttons -->
+                <div class="flex justify-center gap-2 flex-wrap mt-8 mb-10">
+                    <button onclick="selectCity('karachi')" class="city-btn active bg-blue-600 text-white px-4 py-2 rounded-full font-semibold text-xs sm:text-sm transition-all shadow-md">Karachi</button>
+                    <button onclick="selectCity('lahore')" class="city-btn bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm transition-all">Lahore</button>
+                    <button onclick="selectCity('islamabad')" class="city-btn bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm transition-all">Islamabad / Rawalpindi</button>
+                    <button onclick="selectCity('peshawar')" class="city-btn bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm transition-all">Peshawar</button>
+                    <button onclick="selectCity('faisalabad')" class="city-btn bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm transition-all">Faisalabad</button>
+                    <button onclick="selectCity('quetta')" class="city-btn bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm transition-all">Quetta</button>
+                </div>
+
+                <!-- Display Box for City Campus Info -->
+                <div id="cityInfoBox" class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto text-left shadow-sm">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SIT VISION SECTION -->
+        <section class="py-20 vision-gradient text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                
+                <span class="bg-white/20 text-white font-extrabold text-xs uppercase px-4 py-1.5 rounded-full backdrop-blur-sm border border-white/30 tracking-widest">SIT Vision 2030</span>
+                <h2 class="text-3xl sm:text-5xl font-black mt-4 tracking-tight">Empowering 10 Million IT Experts</h2>
+                <p class="text-blue-100 mt-4 text-base sm:text-lg max-w-2xl mx-auto">Driving Pakistan's target $100 Billion Digital Economy through youth tech empowerment.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12 text-left">
+                    
+                    <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/15 transition-all">
+                        <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center font-bold text-xl mb-4">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="text-3xl font-black text-white">10 Million+</h3>
+                        <div class="text-sm font-bold text-emerald-300 mt-1 uppercase tracking-wider">Trained Tech Experts</div>
+                        <p class="text-blue-100 text-xs mt-3 leading-relaxed">Developing an army of qualified software programmers, AI experts, and designers ready for global employment.</p>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/15 transition-all">
+                        <div class="w-12 h-12 bg-white text-emerald-600 rounded-xl flex items-center justify-center font-bold text-xl mb-4">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3 class="text-3xl font-black text-white">$100 Billion</h3>
+                        <div class="text-sm font-bold text-emerald-300 mt-1 uppercase tracking-wider">Digital Economy Contribution</div>
+                        <p class="text-blue-100 text-xs mt-3 leading-relaxed">Boosting Pakistan's foreign exchange earnings via IT export services, tech enterprise incubations, and freelancing.</p>
+                    </div>
+
+                </div>
+
+                <div class="mt-12 bg-white rounded-2xl p-8 max-w-3xl mx-auto text-slate-900 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div class="text-left">
+                        <h4 class="text-xl font-extrabold text-slate-900">Be a Part of This Vision</h4>
+                        <p class="text-slate-600 text-xs mt-1">Join thousands of students who have transformed their careers.</p>
+                    </div>
+                    <button onclick="openModal('enrollModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm px-6 py-3.5 rounded-full shadow-lg shadow-blue-500/30 whitespace-nowrap">
+                        Apply For Admission
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- STUDENT REVIEWS / TESTIMONIALS -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-blue-600 font-extrabold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Success Stories</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">What Our Students Say About Us</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Review 1 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 relative">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Student Muhammad Saad" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">Muhammad Saad</h4>
+                                <p class="text-xs text-blue-600 font-medium">Batch 08 Flutter Developer</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-xs italic">"Saylani Mass IT Training changed my life completely. I came with zero coding background and today I'm earning $1,500/month as a remote mobile app developer."</p>
+                        <div class="mt-4 text-amber-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 relative">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Student Muhammad Fasih" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">Muhammad Fasih</h4>
+                                <p class="text-xs text-blue-600 font-medium">Full Stack Web Engineer</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-xs italic">"The instructors at SMIT are world-class industry professionals. The practical hands-on labs prepared me for real software company challenges."</p>
+                        <div class="mt-4 text-amber-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 relative">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Student Hina Fatima" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">Hina Fatima</h4>
+                                <p class="text-xs text-blue-600 font-medium">UI/UX Designer</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-xs italic">"Saylani provides an empowering learning space for female tech aspirants. Free education with high quality content is a true blessing for Pakistan."</p>
+                        <div class="mt-4 text-amber-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ARTICLES SECTION -->
+        <section id="articles" class="py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <span class="text-blue-600 font-extrabold text-xs uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full">Tech Insights</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Latest News & Articles</h2>
+                    </div>
+                    <a href="#" onclick="alert('Navigating to news archive...'); return false;" class="text-blue-600 font-bold text-sm hover:underline flex items-center gap-1">View All <i class="fas fa-chevron-right text-xs"></i></a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Article Image" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="text-[10px] font-bold text-emerald-600 uppercase bg-emerald-50 px-2 py-0.5 rounded">Industry News</span>
+                            <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 leading-snug">The Rise of Agentic AI in Software Engineering</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed">How Saylani is upgrading its curriculum to produce AI engineers fluent in LangChain & Autonomous Agents.</p>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80" alt="Article Image" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="text-[10px] font-bold text-blue-600 uppercase bg-blue-50 px-2 py-0.5 rounded">Events</span>
+                            <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 leading-snug">National Stadium Entrance Test Draw Thousands</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed">Highlights from Pakistan's largest entrance test organized for thousands of prospective IT students.</p>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" alt="Article Image" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="text-[10px] font-bold text-purple-600 uppercase bg-purple-50 px-2 py-0.5 rounded">Career Advice</span>
+                            <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 leading-snug">How to Land Remote US Tech Jobs from Pakistan</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed">A guide for SMIT graduates on building LinkedIn portfolios, GitHub repos, and acing technical interviews.</p>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- COMPREHENSIVE DARK FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-sm pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-9 h-8 bg-blue-600 rounded flex items-center justify-center font-black text-white text-base">SIT</div>
+                        <span class="font-extrabold text-xl text-white">Saylani <span class="text-emerald-500">IT Training</span></span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed max-w-sm mb-6">
+                        Empowering Pakistan's youth with world-class IT education and training programs to build a brighter digital future.
+                    </p>
+                    <div class="text-xs text-slate-300 space-y-2">
+                        <p><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> A-25, Bahadurabad Chowrangi, Karachi, Pakistan</p>
+                        <p><i class="fas fa-phone text-blue-500 mr-2"></i> +92 21 111 729 526</p>
+                        <p><i class="fas fa-envelope text-blue-500 mr-2"></i> sit.media@saylaniwelfare.com</p>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#home" class="hover:text-blue-400 transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-blue-400 transition-colors">About SIT</a></li>
+                        <li><a href="#" onclick="openModal('enrollModal'); return false;" class="hover:text-blue-400 transition-colors">Enroll Now</a></li>
+                        <li><a href="#" onclick="openModal('resultModal'); return false;" class="hover:text-blue-400 transition-colors">Check Examination Result</a></li>
+                        <li><a href="#campuses" class="hover:text-blue-400 transition-colors">Campuses Locations</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Popular Courses -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4">Our Courses</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#courses" onclick="filterCourses('dev')" class="hover:text-blue-400 transition-colors">Web & Mobile Dev</a></li>
+                        <li><a href="#courses" onclick="filterCourses('ai')" class="hover:text-blue-400 transition-colors">Cloud Applied GenAI</a></li>
+                        <li><a href="#courses" onclick="filterCourses('ai')" class="hover:text-blue-400 transition-colors">Python & Data Science</a></li>
+                        <li><a href="#courses" onclick="filterCourses('design')" class="hover:text-blue-400 transition-colors">Graphic Design with AI</a></li>
+                        <li><a href="#courses" onclick="filterCourses('network')" class="hover:text-blue-400 transition-colors">CCNA & Networking</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Social & App Links -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4">Connect With Us</h4>
+                    <div class="flex gap-3 mb-6">
+                        <a href="https://facebook.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-red-600 text-white flex items-center justify-center transition-colors"><i class="fab fa-youtube"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-pink-600 text-white flex items-center justify-center transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-blue-500 text-white flex items-center justify-center transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <a href="#" onclick="alert('Saylani Student Mobile App link will open on Play Store.'); return false;" class="inline-flex items-center gap-3 bg-slate-800 hover:bg-slate-700 px-4 py-2.5 rounded-xl border border-slate-700 text-white transition-colors">
+                        <i class="fab fa-google-play text-xl text-emerald-400"></i>
+                        <div class="text-left">
+                            <div class="text-[9px] uppercase text-slate-400 font-semibold">GET IT ON</div>
+                            <div class="text-xs font-bold -mt-1">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom Copy -->
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <p>&copy; 2013-2026 Saylani IT Training (SMIT). All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" onclick="alert('Privacy Policy page'); return false;" class="hover:underline">Privacy Policy</a>
+                    <a href="#" onclick="alert('Terms of Service page'); return false;" class="hover:underline">Terms of Service</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- MODAL 1: ENROLLMENT FORM MODAL -->
+    <div id="enrollModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('enrollModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto text-xl mb-2">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900">Student Registration Form</h3>
+                <p class="text-xs text-slate-500 mt-1">Fill out your details to apply for free SIT courses.</p>
+            </div>
+            
+            <form onsubmit="handleEnrollSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" required placeholder="e.g. Muhammad Ali" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">CNIC / Bay Form Number</label>
+                    <input type="text" required placeholder="42101-XXXXXXX-X" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
+                        <input type="email" required placeholder="name@example.com" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Mobile Phone</label>
+                        <input type="tel" required placeholder="0300-XXXXXXX" class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Select Preferred Course</label>
+                    <select required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        <option value="">-- Choose Course --</option>
+                        <option value="web">Web & Mobile App Development</option>
+                        <option value="ai">Cloud Applied Generative AI</option>
+                        <option value="design">Graphic Designing with AI</option>
+                        <option value="ccna">CCNA Cisco Networking</option>
+                        <option value="cyber">Cybersecurity Essentials</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Select City Campus</label>
+                    <select required class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        <option value="karachi">Karachi (Bahadurabad Main Campus)</option>
+                        <option value="lahore">Lahore (Johar Town Campus)</option>
+                        <option value="islamabad">Islamabad Campus</option>
+                        <option value="peshawar">Peshawar Campus</option>
+                        <option value="faisalabad">Faisalabad Campus</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow-lg shadow-blue-500/20 text-sm transition-colors mt-2">
+                    Submit Application
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: CHECK RESULT MODAL -->
+    <div id="resultModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100">
+            <button onclick="closeModal('resultModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-xl mb-2">
+                    <i class="fas fa-poll-h"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900">Check Examination Result</h3>
+                <p class="text-xs text-slate-500 mt-1">Enter your Roll Number or CNIC to retrieve status.</p>
+            </div>
+            
+            <form onsubmit="handleResultSearch(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Roll Number or CNIC</label>
+                    <input type="text" id="resultInput" required placeholder="e.g. SIT-2026-98745 or 42101..." class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-lg shadow-emerald-500/20 text-sm transition-colors">
+                    Search Result
+                </button>
+            </form>
+            
+            <div id="resultOutput" class="mt-4 hidden p-3 rounded-lg text-xs font-medium text-center"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // City Campus Data Object
+        const cityCampuses = {
+            karachi: [
+                { name: "Bahadurabad Main Campus (A-25)", address: "A-25, Bahadurabad Chowrangi, Karachi", courses: "Web Dev, AI, Graphic Design" },
+                { name: "Gulshan-e-Iqbal Campus", address: "Block 13-C, Near Disco Bakery, Main University Road, Karachi", courses: "CCNA, Cyber Security, Web Dev" },
+                { name: "Malir Campus", address: "Opposite Jamia Millia College, Malir, Karachi", courses: "Graphic Design, Web & Mobile" }
+            ],
+            lahore: [
+                { name: "Johar Town Campus", address: "Block M, Johar Town, Near Doctor's Hospital, Lahore", courses: "GenAI, Full Stack Web Dev" },
+                { name: "Gulberg Campus", address: "Main Boulevard, Gulberg III, Lahore", courses: "Graphic Design, Python" }
+            ],
+            islamabad: [
+                { name: "Islamabad Sector I-9 Campus", address: "Plot 14, Industrial Area I-9/2, Islamabad", courses: "Cloud GenAI, CCNA Networking" },
+                { name: "Rawalpindi Saddar Center", address: "Haider Road, Saddar, Rawalpindi", courses: "Web Dev, UI/UX Design" }
+            ],
+            peshawar: [
+                { name: "Peshawar City Center", address: "University Road, Near Opp. Peshawar University, Peshawar", courses: "Web Development, Python AI" }
+            ],
+            faisalabad: [
+                { name: "Faisalabad Campus", address: "D-Ground, People's Colony No. 1, Faisalabad", courses: "Graphic Design, Web Dev" }
+            ],
+            quetta: [
+                { name: "Quetta Campus", address: "Zarghoon Road, Near Railway Station, Quetta", courses: "IT Fundamentals, Web Development" }
+            ]
+        };
+
+        // Render selected city campuses
+        function selectCity(cityName) {
+            // Update button styles
+            const buttons = document.querySelectorAll('.city-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+
+            event.target.classList.remove('bg-slate-100', 'text-slate-700');
+            event.target.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+
+            // Render Campus Cards
+            const box = document.getElementById('cityInfoBox');
+            const data = cityCampuses[cityName] || [];
+            
+            let html = `<h4 class="text-lg font-bold text-slate-900 mb-4 capitalize flex items-center gap-2">
+                <i class="fas fa-building text-blue-600"></i> ${cityName} Campuses (${data.length})
+            </h4><div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+
+            data.forEach(c => {
+                html += `
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <h5 class="font-bold text-blue-600 text-sm mb-1">${c.name}</h5>
+                        <p class="text-xs text-slate-600 mb-2"><i class="fas fa-map-marker-alt text-slate-400 mr-1"></i> ${c.address}</p>
+                        <span class="inline-block bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded">Courses: ${c.courses}</span>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            box.innerHTML = html;
+        }
+
+        // Course Tab Filter Logic
+        function filterCourses(category) {
+            const cards = document.querySelectorAll('.course-card');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            // Update active tab button style
+            tabs.forEach(tab => tab.classList.remove('active'));
+            if(event && event.target && event.target.classList.contains('tab-btn')) {
+                event.target.classList.add('active');
+            }
+
+            // Show/Hide Cards
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    if (card.classList.contains(category)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Mobile Menu Drawer Toggle
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+        mobileBtn.addEventListener('click', toggleMobileMenu);
+
+        // Modal Handlers
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function handleEnrollSubmit(e) {
+            e.preventDefault();
+            alert('🎉 Congratulations! Your application for Saylani Mass IT Training has been submitted successfully. Check your email for exam schedule!');
+            closeModal('enrollModal');
+        }
+
+        function handleResultSearch(e) {
+            e.preventDefault();
+            const input = document.getElementById('resultInput').value;
+            const output = document.getElementById('resultOutput');
+            output.classList.remove('hidden');
+            output.className = 'mt-4 p-3 rounded-lg text-xs font-semibold text-center bg-emerald-100 text-emerald-800 border border-emerald-300';
+            output.innerHTML = `✅ Roll No / CNIC <strong>${input}</strong>: CLEARED (Passed with Grade A). Selected for Batch 12 Entrance Test.`;
+        }
+
+        // Initial Load Actions
+        window.onload = function() {
+            // Default load Karachi campuses
+            selectCity('karachi');
+        };
+    </script>
+</body>
+</html>
